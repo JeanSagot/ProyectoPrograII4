@@ -5,6 +5,7 @@
  */
 package Interface;
 
+import Domain.Client;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -150,20 +151,6 @@ public class MainFrameClient extends javax.swing.JFrame {
                 new MainFrameClient().setVisible(true);
             }
         });
-         try {
-            socket = new Socket("192.168.100.6",9999);
-            dataIn = new DataInputStream(socket.getInputStream());
-            dataOut = new DataOutputStream(socket.getOutputStream());
-
-            String message = "";
-            while (!message.equals("exit")) {
-                message = dataIn.readUTF();
-                //Muestra el mensaje en el area
-                jtp_messageArea.setText(jtp_messageArea.getText().trim() + "\nServer:\t" + message);
-            }
-        } catch (Exception e) {
-            System.out.println("Error receiveMessage");
-        }
        
     }
     

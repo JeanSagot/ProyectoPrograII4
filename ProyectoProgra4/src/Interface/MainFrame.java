@@ -5,10 +5,17 @@
  */
 package Interface;
 
+import Domain.Board;
+import Domain.ImageManagement;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -20,14 +27,21 @@ public class MainFrame extends javax.swing.JFrame {
     static Socket socket;
     static DataInputStream dataIn;
     static DataOutputStream dataOut;
+    
 
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame() throws IOException {
+        Board board = new Board();
+        
         initComponents();
+        initImages();
     }
-
+    
+    public void initImages() throws IOException{
+        ImageManagement imgMng = new ImageManagement();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +57,8 @@ public class MainFrame extends javax.swing.JFrame {
         jb_sendMessage = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtp_messageArea = new javax.swing.JTextPane();
+        jp_rivalBoard = new Domain.Board();
+        jp_allyBoard = new Domain.Board();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,17 +88,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         jp_chatArea.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 220));
 
-        jp_background.add(jp_chatArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 370, 260));
+        jp_background.add(jp_chatArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 370, 260));
+        jp_background.add(jp_rivalBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 710, 270));
+        jp_background.add(jp_allyBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 710, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jp_background, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
+            .addComponent(jp_background, javax.swing.GroupLayout.DEFAULT_SIZE, 1289, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jp_background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jp_background, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
         );
 
         pack();
@@ -135,7 +153,11 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                try {
+                    new MainFrame().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         String message = "";
@@ -162,8 +184,10 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jb_sendMessage;
+    private Domain.Board jp_allyBoard;
     private javax.swing.JPanel jp_background;
     private javax.swing.JPanel jp_chatArea;
+    private Domain.Board jp_rivalBoard;
     private javax.swing.JTextField jtf_writeMessage;
     private static javax.swing.JTextPane jtp_messageArea;
     // End of variables declaration//GEN-END:variables
