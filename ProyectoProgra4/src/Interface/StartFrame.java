@@ -21,6 +21,7 @@ public class StartFrame extends javax.swing.JFrame {
      */
     public StartFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
         jl_showRoom.setVisible(false);
         jb_joinRoom.setVisible(false);
     }
@@ -41,6 +42,7 @@ public class StartFrame extends javax.swing.JFrame {
         jtf_enterRoom = new javax.swing.JTextField();
         jl_showRoom = new javax.swing.JLabel();
         jb_joinRoom = new javax.swing.JButton();
+        jb_instructions = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,14 +54,14 @@ public class StartFrame extends javax.swing.JFrame {
 
         jb_newGame.setBackground(new java.awt.Color(0, 153, 153));
         jb_newGame.setForeground(new java.awt.Color(255, 255, 255));
-        jb_newGame.setText("Nuevo Juego");
-        jb_newGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jb_newGame.setText("New Game");
+        jb_newGame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jb_newGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_newGameActionPerformed(evt);
             }
         });
-        jp_backGround.add(jb_newGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, 220, 50));
+        jp_backGround.add(jb_newGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 220, 50));
 
         jl_or.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jl_or.setForeground(new java.awt.Color(0, 102, 102));
@@ -80,19 +82,30 @@ public class StartFrame extends javax.swing.JFrame {
 
         jl_showRoom.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jl_showRoom.setForeground(new java.awt.Color(0, 153, 153));
-        jl_showRoom.setText("Te has unido a la sala: 5001");
-        jp_backGround.add(jl_showRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 270, 70));
+        jl_showRoom.setText("Yo've joined room: 5001");
+        jp_backGround.add(jl_showRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 220, 70));
 
         jb_joinRoom.setBackground(new java.awt.Color(0, 153, 153));
         jb_joinRoom.setForeground(new java.awt.Color(255, 255, 255));
-        jb_joinRoom.setText("Unirse a la sala");
-        jb_joinRoom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jb_joinRoom.setText("Join room");
+        jb_joinRoom.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jb_joinRoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_joinRoomActionPerformed(evt);
             }
         });
         jp_backGround.add(jb_joinRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 630, 200, 50));
+
+        jb_instructions.setBackground(new java.awt.Color(0, 153, 153));
+        jb_instructions.setForeground(new java.awt.Color(255, 255, 255));
+        jb_instructions.setText("Instructions");
+        jb_instructions.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jb_instructions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_instructionsActionPerformed(evt);
+            }
+        });
+        jp_backGround.add(jb_instructions, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 220, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,6 +146,10 @@ public class StartFrame extends javax.swing.JFrame {
         jb_joinRoom.setVisible(true);
     }//GEN-LAST:event_jtf_enterRoomMouseClicked
 
+    private void jb_instructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_instructionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_instructionsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -169,6 +186,7 @@ public class StartFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jb_instructions;
     private javax.swing.JButton jb_joinRoom;
     private javax.swing.JButton jb_newGame;
     private javax.swing.JLabel jl_or;
