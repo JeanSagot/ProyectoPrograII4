@@ -45,21 +45,21 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        oponnentBoard1 = new Domain.OponnentBoard();
         jp_background = new javax.swing.JPanel();
         jp_chatArea = new javax.swing.JPanel();
         jtf_writeMessage = new javax.swing.JTextField();
         jb_sendMessage = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtp_messageArea = new javax.swing.JTextPane();
-        jp_rivalBoard = new Domain.Board();
         jp_allyBoard = new Domain.Board();
         btn_restart = new javax.swing.JButton();
         lbl_name = new javax.swing.JLabel();
+        oponnentBoard2 = new Domain.OponnentBoard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jp_background.setBackground(new java.awt.Color(255, 255, 255));
-        jp_background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jp_chatArea.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -84,10 +84,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jp_chatArea.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 220));
 
-        jp_background.add(jp_chatArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 370, 260));
-        jp_background.add(jp_rivalBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 710, 270));
-        jp_background.add(jp_allyBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 710, -1));
-
         btn_restart.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         btn_restart.setText("Restart");
         btn_restart.addActionListener(new java.awt.event.ActionListener() {
@@ -95,22 +91,60 @@ public class MainFrame extends javax.swing.JFrame {
                 btn_restartActionPerformed(evt);
             }
         });
-        jp_background.add(btn_restart, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         lbl_name.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        lbl_name.setForeground(new java.awt.Color(0, 0, 0));
         lbl_name.setText("Player Name: ");
-        jp_background.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        javax.swing.GroupLayout jp_backgroundLayout = new javax.swing.GroupLayout(jp_background);
+        jp_background.setLayout(jp_backgroundLayout);
+        jp_backgroundLayout.setHorizontalGroup(
+            jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_backgroundLayout.createSequentialGroup()
+                .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jp_chatArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jp_backgroundLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(btn_restart))
+                            .addComponent(lbl_name))))
+                .addGap(150, 150, 150)
+                .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jp_allyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addComponent(oponnentBoard2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        jp_backgroundLayout.setVerticalGroup(
+            jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_backgroundLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addComponent(btn_restart)
+                        .addGap(65, 65, 65)
+                        .addComponent(lbl_name))
+                    .addComponent(oponnentBoard2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jp_chatArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jp_allyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jp_background, javax.swing.GroupLayout.DEFAULT_SIZE, 1289, Short.MAX_VALUE)
+            .addComponent(jp_background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jp_background, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+            .addComponent(jp_background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -201,9 +235,10 @@ public class MainFrame extends javax.swing.JFrame {
     private Domain.Board jp_allyBoard;
     private javax.swing.JPanel jp_background;
     private javax.swing.JPanel jp_chatArea;
-    private Domain.Board jp_rivalBoard;
     private javax.swing.JTextField jtf_writeMessage;
     private static javax.swing.JTextPane jtp_messageArea;
     private javax.swing.JLabel lbl_name;
+    private Domain.OponnentBoard oponnentBoard1;
+    private Domain.OponnentBoard oponnentBoard2;
     // End of variables declaration//GEN-END:variables
 }

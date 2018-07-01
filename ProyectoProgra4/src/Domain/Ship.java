@@ -16,7 +16,6 @@ public class Ship {
     private int shipSize; //Para ver si es la madre o una nave hija
     private int livesLeft; //la vida de la madre
     private boolean isDestroyed;
-    private position shipPosition;
 
     //Constructors
     public Ship(String name, int shipSize) {
@@ -60,14 +59,6 @@ public class Ship {
 
     public void setIsDestroyed(boolean isDestroyed) {
         this.isDestroyed = isDestroyed;
-    }
-
-    public position getShipPosition() {
-        return shipPosition;
-    }
-
-    public void setShipPosition(position shipPosition) {
-        this.shipPosition = shipPosition;
     }
 
     
