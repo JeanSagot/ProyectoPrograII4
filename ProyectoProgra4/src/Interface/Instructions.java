@@ -16,6 +16,9 @@ public class Instructions extends javax.swing.JFrame {
      */
     public Instructions() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        ta_instructions.setEditable(false);
+        ta_instructions.setEnabled(false);
     }
 
     /**
@@ -29,6 +32,9 @@ public class Instructions extends javax.swing.JFrame {
 
         jp_background = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ta_instructions = new javax.swing.JTextArea();
+        btn_exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,21 +44,51 @@ public class Instructions extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Instructions");
 
+        ta_instructions.setBackground(new java.awt.Color(0, 0, 0));
+        ta_instructions.setColumns(20);
+        ta_instructions.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        ta_instructions.setForeground(new java.awt.Color(255, 255, 255));
+        ta_instructions.setRows(5);
+        ta_instructions.setText("1 - Click on the \"New Game\" button to\nstart a new game, or join a room with\nthe respective code.\n2 - Write your in-game name.\n3 - Place your ships on the board.\n4 - If it's your turn, choose an enemy\nboard position to attack, \nand wait for the next turn.\n5 - If you are able to hit twice the foe's\nQueen Ship, that means you've won the\ngame, on the other hand if it happens\nto your Queen Ship; YOU LOSE!");
+        jScrollPane1.setViewportView(ta_instructions);
+
+        btn_exit.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btn_exit.setText("GOT IT!");
+        btn_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_exitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jp_backgroundLayout = new javax.swing.GroupLayout(jp_background);
         jp_background.setLayout(jp_backgroundLayout);
         jp_backgroundLayout.setHorizontalGroup(
             jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_backgroundLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jLabel1)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_backgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jp_backgroundLayout.createSequentialGroup()
+                                .addGap(91, 91, 91)
+                                .addComponent(jLabel1))
+                            .addGroup(jp_backgroundLayout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(btn_exit)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jp_backgroundLayout.setVerticalGroup(
             jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jp_backgroundLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_exit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -68,6 +104,12 @@ public class Instructions extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exitActionPerformed
+        StartFrame start = new StartFrame();
+        this.setVisible(false);
+        start.setVisible(true);
+    }//GEN-LAST:event_btn_exitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,6 +138,8 @@ public class Instructions extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -106,7 +150,10 @@ public class Instructions extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_exit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jp_background;
+    private javax.swing.JTextArea ta_instructions;
     // End of variables declaration//GEN-END:variables
 }
