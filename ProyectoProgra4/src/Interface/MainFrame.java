@@ -1,5 +1,6 @@
 package Interface;
 
+import Constants.Constants;
 import Domain.Board;
 import Domain.ImageManagement;
 import java.io.DataInputStream;
@@ -19,37 +20,58 @@ public class MainFrame extends javax.swing.JFrame {
     static DataInputStream dataIn;
     static DataOutputStream dataOut;
     static String name;
-    
+
     public MainFrame() throws IOException {
         Board board = new Board();
         initComponents();
+        // showBoard
         saveName();
         initImages();
     }
-    
+
+    public void showBoard() {
+        if (Board.clickCount < Constants.BOARD_SIZE && boardClient.clickCount < Constants.BOARD_SIZE) {
+            jp_clientBoardContainer.setVisible(false);
+            jp_serverBoardContainer.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Tropas listas.La batalla ha comenzado");
+            jp_clientBoardContainer.setVisible(true);
+            jp_serverBoardContainer.setVisible(true);
+        }
+    }
+
+    public void showBoardTurn() {
+        if (Constants.turn % 2 == 0) {
+            jp_serverBoardContainer.setVisible(true);
+            jp_clientBoardContainer.setVisible(false);
+        } else {
+            jp_serverBoardContainer.setVisible(false);
+            jp_clientBoardContainer.setVisible(true);
+        }
+    }
+
     public void saveName() {
         ImageIcon icon = new ImageIcon(getClass().getResource("/Assets/name.png"));
-        try{
+        try {
             name = JOptionPane.showInputDialog(icon, null);
-            if(name == null || name.equals("")){
-                JOptionPane.showMessageDialog(null, "You can't leave this input empty","Invalid Username",JOptionPane.ERROR_MESSAGE);
+            if (name == null || name.equals("")) {
+                JOptionPane.showMessageDialog(null, "You can't leave this input empty", "Invalid Username", JOptionPane.ERROR_MESSAGE);
                 saveName();
             }
-            jl_playerName.setText("Player Name: "+name);
-        }catch (NumberFormatException nfe) {
+            jl_playerName.setText("Player Name: " + name);
+        } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "Your name can't be a numeric value");
         }
     }
-    
-    public void initImages() throws IOException{
+
+    public void initImages() throws IOException {
         ImageManagement imgMng = new ImageManagement();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        oponnentBoard1 = new Domain.OponnentBoard();
         jp_background = new javax.swing.JPanel();
         jp_chatArea = new javax.swing.JPanel();
         jtf_writeMessage = new javax.swing.JTextField();
@@ -59,9 +81,13 @@ public class MainFrame extends javax.swing.JFrame {
         jp_allyBoardServer = new Domain.Board();
         btn_restart = new javax.swing.JButton();
         jl_playerName = new javax.swing.JLabel();
-        oponnentBoardServer = new Domain.OponnentBoard();
         boardClient = new Domain.BoardClient();
+        jButton1 = new javax.swing.JButton();
+        jb_ClientPass = new javax.swing.JButton();
+        jp_clientBoardContainer = new javax.swing.JPanel();
         opponentBoardClient = new Domain.OpponentBoardClient();
+        jp_serverBoardContainer = new javax.swing.JPanel();
+        oponnentBoardServer = new Domain.OponnentBoard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,9 +132,65 @@ public class MainFrame extends javax.swing.JFrame {
         jl_playerName.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jl_playerName.setText("Player Name: ");
         jp_background.add(jl_playerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-        jp_background.add(oponnentBoardServer, new org.netbeans.lib.awtextra.AbsoluteConstraints(804, 30, 336, -1));
         jp_background.add(boardClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, 340, -1));
-        jp_background.add(opponentBoardClient, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 22, 320, 210));
+
+        jButton1.setText("ServerPass");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jp_background.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, -1, -1));
+
+        jb_ClientPass.setText("ClientPass");
+        jb_ClientPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ClientPassActionPerformed(evt);
+            }
+        });
+        jp_background.add(jb_ClientPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
+
+        jp_clientBoardContainer.setBackground(new java.awt.Color(255, 51, 51));
+
+        javax.swing.GroupLayout jp_clientBoardContainerLayout = new javax.swing.GroupLayout(jp_clientBoardContainer);
+        jp_clientBoardContainer.setLayout(jp_clientBoardContainerLayout);
+        jp_clientBoardContainerLayout.setHorizontalGroup(
+            jp_clientBoardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_clientBoardContainerLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(opponentBoardClient, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jp_clientBoardContainerLayout.setVerticalGroup(
+            jp_clientBoardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_clientBoardContainerLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(opponentBoardClient, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jp_background.add(jp_clientBoardContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, 370, 250));
+
+        jp_serverBoardContainer.setBackground(new java.awt.Color(0, 204, 204));
+
+        javax.swing.GroupLayout jp_serverBoardContainerLayout = new javax.swing.GroupLayout(jp_serverBoardContainer);
+        jp_serverBoardContainer.setLayout(jp_serverBoardContainerLayout);
+        jp_serverBoardContainerLayout.setHorizontalGroup(
+            jp_serverBoardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_serverBoardContainerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(oponnentBoardServer, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jp_serverBoardContainerLayout.setVerticalGroup(
+            jp_serverBoardContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_serverBoardContainerLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(oponnentBoardServer, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        jp_background.add(jp_serverBoardContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, 350, 250));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,8 +223,17 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_writeMessageMouseClicked
 
     private void btn_restartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restartActionPerformed
-       
+
     }//GEN-LAST:event_btn_restartActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Constants.turn++;
+        System.out.println(Constants.turn%2);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jb_ClientPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ClientPassActionPerformed
+        Constants.turn++;
+    }//GEN-LAST:event_jb_ClientPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,15 +296,18 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Domain.BoardClient boardClient;
     private javax.swing.JButton btn_restart;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jb_ClientPass;
     private javax.swing.JButton jb_sendMessage;
     private javax.swing.JLabel jl_playerName;
     private Domain.Board jp_allyBoardServer;
     private javax.swing.JPanel jp_background;
     private javax.swing.JPanel jp_chatArea;
+    private static javax.swing.JPanel jp_clientBoardContainer;
+    private static javax.swing.JPanel jp_serverBoardContainer;
     private javax.swing.JTextField jtf_writeMessage;
     private static javax.swing.JTextPane jtp_messageArea;
-    private Domain.OponnentBoard oponnentBoard1;
     private Domain.OponnentBoard oponnentBoardServer;
     private Domain.OpponentBoardClient opponentBoardClient;
     // End of variables declaration//GEN-END:variables

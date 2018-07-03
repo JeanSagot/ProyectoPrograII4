@@ -28,18 +28,14 @@ public class OpponentBoardClient extends JPanel {
     private static int xCoord, yCoord;
 
     public OpponentBoardClient() {
-//        if(turn%2==1){
-          setShipPhase();  
-//        }else{
-//            this.setVisible(true);
-//        }
+            attackRival();
     }
 
     /**
      * Metodo encargado de dibujar las naves y ponerlas en la matriz cuando se
      * clickea y poner la madre y los hijos en el grid
      */
-    public void setShipPhase() {
+    public void attackRival() {
         setLayout(new GridLayout(Constants.BOARD_SIZE, Constants.BOARD_SIZE, 1, 1));
         setBackground(Color.black);
         for (int i = 0; i < Constants.BOARD_SIZE * Constants.BOARD_SIZE; i++) {
@@ -58,41 +54,42 @@ public class OpponentBoardClient extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                clickCount++;
                 int numPanel;
-                if (clickCount == Constants.BOARD_SIZE * Constants.BOARD_SIZE + 1) {
-                    JOptionPane.showMessageDialog(null, "WOW, Has destruido todas las naves hasta el ultimo tiro");
-                } else {
+                 if(Board.clickCount<=3){
+                }else{
+                if (Constants.turn % 2 == 1) {
+                    Constants.turn++;
                     /*----------------------------------------*/
-                    if(Constants.shotsHitClient != Constants.BOARD_SIZE){
+                    if (Constants.shotsHitClient != Constants.BOARD_SIZE) {
                         JPanel panel = (JPanel) getComponentAt(e.getPoint());
-                    selectedPanel = panel;
+                        selectedPanel = panel;
 
-                    if (panel == null || panel == OpponentBoardClient.this) {
-                        return;
-                    }
+                        if (panel == null || panel == OpponentBoardClient.this) {
+                            return;
+                        }
 
-                    if (selectedPanel != null) {
+                        if (selectedPanel != null) {
 
-                        selectedPanel.setBackground(originalColor);
-                        selectedPanel.revalidate();
-                        selectedPanel.repaint();
-                    }
-                    numPanel = Integer.parseInt(selectedPanel.getName());
-                    if (isShipHit(numPanel) == true || isMotherHit(numPanel) == true) {
-                        Constants.shotsHitClient++;
-                        paintHit(selectedPanel);
+                            selectedPanel.setBackground(originalColor);
+                            selectedPanel.revalidate();
+                            selectedPanel.repaint();
+                        }
+                        numPanel = Integer.parseInt(selectedPanel.getName());
+                        if (isShipHit(numPanel) == true || isMotherHit(numPanel) == true) {
+                            Constants.shotsHitClient++;
+                            paintHit(selectedPanel);
+                        } else {
+                            Constants.attemptsClient++;
+                            paintMissed(selectedPanel);
+                        }
+                        for (int i = 0; i < Constants.shipsLocationClient.length; i++) {
+                            System.out.println("ARRAY " + Constants.shipsLocationClient[i]);
+                        }
                     } else {
-                        Constants.attemptsClient++;
-                        paintMissed(selectedPanel);
-                    }
-                    for (int i = 0; i < Constants.shipsLocationClient.length; i++) {
-                        System.out.println("ARRAY " + Constants.shipsLocationClient[i]);
-                    }
-                    }else{
                         JOptionPane.showMessageDialog(null, "Felicidades has ganado la batalla");
-                    }   
+                    }
                 }
+            }
             }
         });
     }//END setShip

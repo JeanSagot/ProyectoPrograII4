@@ -24,7 +24,7 @@ public class BoardClient extends JPanel {
 
     private JPanel selectedPanel = null;
     private Color originalColor = null;
-    private int clickCount = 0;
+    public static int clickCount = 0;
     int shotHit = 0;
     ImageIcon ClientImages;
     private static int xCoord, yCoord;

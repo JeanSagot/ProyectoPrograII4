@@ -19,7 +19,7 @@ public class Board extends JPanel {
 
     private JPanel selectedPanel = null;
     private Color originalColor = null;
-    private int clickCount = 0;
+    public static int clickCount = 0;
     int shotHit = 0;
     ImageIcon serverImages;
     private static int xCoord, yCoord;

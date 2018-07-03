@@ -29,18 +29,14 @@ public class OponnentBoard extends JPanel {
     private static int xCoord, yCoord;
 
     public OponnentBoard() {
-//        if(turn%2==1){
-          setShipPhase();  
-//        }else{
-//            this.setVisible(true);
-//        }
+        attackRival();
     }
 
     /**
      * Metodo encargado de dibujar las naves y ponerlas en la matriz cuando se
      * clickea y poner la madre y los hijos en el grid
      */
-    public void setShipPhase() {
+    public void attackRival() {
         setLayout(new GridLayout(Constants.BOARD_SIZE, Constants.BOARD_SIZE, 1, 1));
         setBackground(Color.black);
         for (int i = 0; i < Constants.BOARD_SIZE * Constants.BOARD_SIZE; i++) {
@@ -48,7 +44,6 @@ public class OponnentBoard extends JPanel {
             String name = String.format("%d%d",
                     i / Constants.BOARD_SIZE, i % Constants.BOARD_SIZE);
             panel.setName(name);
-
             if (i == 0) {
                 originalColor = panel.getBackground();
             }
@@ -59,41 +54,43 @@ public class OponnentBoard extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                clickCount++;
+
                 int numPanel;
-                if (clickCount == Constants.BOARD_SIZE * Constants.BOARD_SIZE + 1) {
-                    JOptionPane.showMessageDialog(null, "WOW, Has destruido todas las naves hasta el ultimo tiro");
-                } else {
-                    /*----------------------------------------*/
-                    if(Constants.shotsHitServer != Constants.BOARD_SIZE){
-                        JPanel panel = (JPanel) getComponentAt(e.getPoint());
-                    selectedPanel = panel;
+                if(Board.clickCount<=3){
+                }else{
+                if (Constants.turn % 2 == 0) {
+                    Constants.turn++;
+                        /*----------------------------------------*/
+                        if (Constants.shotsHitServer != Constants.BOARD_SIZE) {
+                            JPanel panel = (JPanel) getComponentAt(e.getPoint());
+                            selectedPanel = panel;
 
-                    if (panel == null || panel == OponnentBoard.this) {
-                        return;
-                    }
+                            if (panel == null || panel == OponnentBoard.this) {
+                                return;
+                            }
 
-                    if (selectedPanel != null) {
+                            if (selectedPanel != null) {
 
-                        selectedPanel.setBackground(originalColor);
-                        selectedPanel.revalidate();
-                        selectedPanel.repaint();
-                    }
-                    numPanel = Integer.parseInt(selectedPanel.getName());
-                    if (isShipHit(numPanel) == true || isMotherHit(numPanel) == true) {
-                        Constants.shotsHitServer++;
-                        paintHit(selectedPanel);
-                    } else {
-                        Constants.attemptsServer++;
-                        paintMissed(selectedPanel);
-                    }
-                    for (int i = 0; i < Constants.shipsLocationServer.length; i++) {
-                        System.out.println("ARRAY " + Constants.shipsLocationServer[i]);
-                    }
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Felicidades has ganado la batalla");
-                    }   
-                }
+                                selectedPanel.setBackground(originalColor);
+                                selectedPanel.revalidate();
+                                selectedPanel.repaint();
+                            }
+                            numPanel = Integer.parseInt(selectedPanel.getName());
+                            if (isShipHit(numPanel) == true || isMotherHit(numPanel) == true) {
+                                Constants.shotsHitServer++;
+                                paintHit(selectedPanel);
+                            } else {
+                                Constants.attemptsServer++;
+                                paintMissed(selectedPanel);
+                            }
+                            for (int i = 0; i < Constants.shipsLocationServer.length; i++) {
+                                System.out.println("ARRAY " + Constants.shipsLocationServer[i]);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Felicidades has ganado la batalla");
+                        }
+                }//END turn
+            }//END clickCount
             }
         });
     }//END setShip
