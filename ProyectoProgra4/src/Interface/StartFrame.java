@@ -5,10 +5,12 @@
  */
 package Interface;
 
+import ChatServer.MainForm;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import Constants.Constants;
 
 /**
  *
@@ -16,6 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class StartFrame extends javax.swing.JFrame {
     int portNum=5001;
+    boolean selected;
     /**
      * Creates new form StartFrame
      */
@@ -43,6 +46,9 @@ public class StartFrame extends javax.swing.JFrame {
         jl_showRoom = new javax.swing.JLabel();
         jb_joinRoom = new javax.swing.JButton();
         jb_instructions = new javax.swing.JButton();
+        rdbtn_5 = new javax.swing.JRadioButton();
+        rdbtn_3 = new javax.swing.JRadioButton();
+        jl_Choose = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,7 +67,7 @@ public class StartFrame extends javax.swing.JFrame {
                 jb_newGameActionPerformed(evt);
             }
         });
-        jp_backGround.add(jb_newGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 220, 50));
+        jp_backGround.add(jb_newGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 220, 50));
 
         jl_or.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jl_or.setForeground(new java.awt.Color(0, 102, 102));
@@ -105,7 +111,30 @@ public class StartFrame extends javax.swing.JFrame {
                 jb_instructionsActionPerformed(evt);
             }
         });
-        jp_backGround.add(jb_instructions, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 220, 50));
+        jp_backGround.add(jb_instructions, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 220, 50));
+
+        rdbtn_5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        rdbtn_5.setText("5x5");
+        rdbtn_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbtn_5ActionPerformed(evt);
+            }
+        });
+        jp_backGround.add(rdbtn_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 440, -1, -1));
+
+        rdbtn_3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        rdbtn_3.setText("3x3");
+        rdbtn_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbtn_3ActionPerformed(evt);
+            }
+        });
+        jp_backGround.add(rdbtn_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 440, -1, -1));
+
+        jl_Choose.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jl_Choose.setForeground(new java.awt.Color(0, 153, 153));
+        jl_Choose.setText("Choose the board size:");
+        jp_backGround.add(jl_Choose, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 220, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,14 +151,20 @@ public class StartFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_newGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_newGameActionPerformed
+        if(selected!=true){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el tamaño del tablero de juego","Error de tamaño",JOptionPane.ERROR_MESSAGE);
+        }else{
         jl_showRoom.setVisible(true);
         try {
             MainFrame mfServer = new MainFrame();
+            MainForm serverManager = new MainForm();
+            serverManager.setVisible(true);
             mfServer.setVisible(true);
+            this.dispose();
         } catch (IOException ex) {
             Logger.getLogger(StartFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        }
     }//GEN-LAST:event_jb_newGameActionPerformed
 
     private void jb_joinRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_joinRoomActionPerformed
@@ -149,6 +184,18 @@ public class StartFrame extends javax.swing.JFrame {
     private void jb_instructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_instructionsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_instructionsActionPerformed
+
+    private void rdbtn_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn_5ActionPerformed
+        rdbtn_3.setSelected(false);
+        Constants.BOARD_SIZE = 5;
+        selected = true;
+    }//GEN-LAST:event_rdbtn_5ActionPerformed
+
+    private void rdbtn_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbtn_3ActionPerformed
+        rdbtn_5.setSelected(false);
+        Constants.BOARD_SIZE = 3;
+        selected = true;
+    }//GEN-LAST:event_rdbtn_3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,10 +236,13 @@ public class StartFrame extends javax.swing.JFrame {
     private javax.swing.JButton jb_instructions;
     private javax.swing.JButton jb_joinRoom;
     private javax.swing.JButton jb_newGame;
+    private javax.swing.JLabel jl_Choose;
     private javax.swing.JLabel jl_or;
     private javax.swing.JLabel jl_showImage;
     private javax.swing.JLabel jl_showRoom;
     private javax.swing.JPanel jp_backGround;
     private javax.swing.JTextField jtf_enterRoom;
+    private javax.swing.JRadioButton rdbtn_3;
+    private javax.swing.JRadioButton rdbtn_5;
     // End of variables declaration//GEN-END:variables
 }

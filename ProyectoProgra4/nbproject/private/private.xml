@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Domain/OponnentBoard.java</file>
-            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Domain/OpponentBoardClient.java</file>
-            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Domain/Server.java</file>
-            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Constants/Constants.java</file>
+            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Interface/MainFrameClient.java</file>
+            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/ChatClient/ClientThread.java</file>
             <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Interface/MainFrame.java</file>
-            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Domain/Board.java</file>
-            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Domain/BoardClient.java</file>
+            <file>file:/C:/Users/jeanp/OneDrive/Documentos/RepoProgra4/ProyectoProgra4/src/Interface/StartFrame.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,6 +5,7 @@
  */
 package Interface;
 
+import ChatClient.LoginForm;
 import Domain.Client;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -36,54 +37,49 @@ public class MainFrameClient extends javax.swing.JFrame {
     private void initComponents() {
 
         jp_background = new javax.swing.JPanel();
-        jp_chatArea = new javax.swing.JPanel();
-        jtf_writeMessage = new javax.swing.JTextField();
-        jb_sendMessage = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtp_messageArea = new javax.swing.JTextPane();
+        boardClient1 = new Domain.BoardClient();
+        opponentBoardClient1 = new Domain.OpponentBoardClient();
+        jb_enterChat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jp_background.setBackground(new java.awt.Color(255, 255, 255));
 
-        jp_chatArea.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jtf_writeMessage.setText("Type here...");
-        jtf_writeMessage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtf_writeMessageMouseClicked(evt);
-            }
-        });
-        jp_chatArea.add(jtf_writeMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 222, 320, 38));
-
-        jb_sendMessage.setText("ok");
-        jb_sendMessage.addActionListener(new java.awt.event.ActionListener() {
+        jb_enterChat.setText("Chat");
+        jb_enterChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_sendMessageActionPerformed(evt);
+                jb_enterChatActionPerformed(evt);
             }
         });
-        jp_chatArea.add(jb_sendMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 50, 40));
-
-        jtp_messageArea.setEditable(false);
-        jScrollPane2.setViewportView(jtp_messageArea);
-
-        jp_chatArea.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 220));
 
         javax.swing.GroupLayout jp_backgroundLayout = new javax.swing.GroupLayout(jp_background);
         jp_background.setLayout(jp_backgroundLayout);
         jp_backgroundLayout.setHorizontalGroup(
             jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_backgroundLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boardClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(423, 423, 423))
             .addGroup(jp_backgroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jp_chatArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(670, Short.MAX_VALUE))
+                .addGroup(jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addGap(433, 433, 433)
+                        .addComponent(opponentBoardClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jp_backgroundLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_enterChat)))
+                .addContainerGap(435, Short.MAX_VALUE))
         );
         jp_backgroundLayout.setVerticalGroup(
             jp_backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_backgroundLayout.createSequentialGroup()
-                .addContainerGap(309, Short.MAX_VALUE)
-                .addComponent(jp_chatArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(31, 31, 31)
+                .addComponent(opponentBoardClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addComponent(boardClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jb_enterChat)
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -100,23 +96,10 @@ public class MainFrameClient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_sendMessageActionPerformed
-       // client.sendMessage(jtf_writeMessage);
-       try {
-            String messageOut = "";
-            messageOut = jtf_writeMessage.getText().trim();
-            dataOut.writeUTF(messageOut);
-            jtp_messageArea.setText(jtp_messageArea.getText().trim() + "\nClient:\t" + messageOut);
-            jtf_writeMessage.setText("Type here...");
-            
-        } catch (Exception e) {
-            System.out.println("Error sendMessage");
-        }
-    }//GEN-LAST:event_jb_sendMessageActionPerformed
-
-    private void jtf_writeMessageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtf_writeMessageMouseClicked
-        jtf_writeMessage.setText("");
-    }//GEN-LAST:event_jtf_writeMessageMouseClicked
+    private void jb_enterChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_enterChatActionPerformed
+        LoginForm loginChat = new LoginForm();
+        loginChat.setVisible(true);
+    }//GEN-LAST:event_jb_enterChatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,11 +139,9 @@ public class MainFrameClient extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton jb_sendMessage;
+    private Domain.BoardClient boardClient1;
+    private javax.swing.JButton jb_enterChat;
     private javax.swing.JPanel jp_background;
-    private javax.swing.JPanel jp_chatArea;
-    private javax.swing.JTextField jtf_writeMessage;
-    private static javax.swing.JTextPane jtp_messageArea;
+    private Domain.OpponentBoardClient opponentBoardClient1;
     // End of variables declaration//GEN-END:variables
 }

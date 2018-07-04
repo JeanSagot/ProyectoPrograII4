@@ -16,7 +16,7 @@ public class Constants {
 
     public final int board[][] = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
     public static final int MOTHERSHIP_SIZE = 2;
-    public static final int BOARD_SIZE = 3;
+    public static int BOARD_SIZE = 3;
     public static final int SHIP_SIZE = 2;
     public static final int W = 60;
     public static final int H = W;
